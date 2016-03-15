@@ -1,0 +1,143 @@
+<style type="text/css">
+.email-signature {
+  font-family: Arial;
+  margin-bottom: 50px;
+  border: 3px solid #dedede;
+  padding: 30px; }
+  .email-signature.pc {
+    font-size: 8pt; }
+    .email-signature.pc .name-line {
+      font-size: 10pt; }
+  .email-signature.mac {
+    font-size: 10pt; }
+    .email-signature.mac .name-line {
+      font-size: 13pt; }
+  .email-signature .name-line {
+    color: black;
+    font-weight: bold; }
+  .email-signature .title-line {
+    color: #5C6670; }
+  .email-signature .university-line {
+    color: #8C1D40;
+    font-weight: bold; }
+  .email-signature .unit-line {
+    color: #5C6670;
+    font-weight: bold; }
+  .email-signature .address-lines {
+    color: #5C6670; }
+    .email-signature .address-lines span {
+      display: block; }
+  .email-signature .phone-line {
+    color: black;
+    font-weight: bold; }
+
+.email-signature-container fieldset {
+  margin: 20px 0;
+  padding: 20px;
+  border: 3px solid #dedede; }
+.email-signature-container fieldset input {
+    padding: 8px;
+    display: block;
+    margin-bottom: 5px;
+    width: 66%; }
+</style>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script type="text/javascript">
+  angular.module('emailSignatureBranding', [])
+  .controller('Controller', ['$scope', function($scope) {
+    $scope.name = 'Full Name';
+    $scope.title = '';
+    $scope.university = 'Arizona State University';
+    $scope.unit = 'College of Liberal Arts and Sciences';
+    $scope.address1 = 'P.O. Box 876505';
+    $scope.address2 = '';
+    $scope.address3 = 'Tempe, AZ 85287-6505';
+    $scope.phone = '';
+    $scope.mobile = '';
+
+    $scope.checkMobile = function() {
+      if ($scope.mobile_input == '') {
+        $scope.mobile = '';
+      }
+      else {
+        $scope.mobile = '| C: ' + $scope.mobile_input;
+      }
+    }
+
+    $scope.checkPhone = function() {
+      if ($scope.phone_input == '') {
+        $scope.phone = '';
+      }
+      else {
+        $scope.phone = 'P: ' + $scope.phone_input;
+      }
+    }
+  }]);
+</script>
+
+
+<div ng-app="emailSignatureBranding">
+
+  <div class="email-signature-container" ng-controller="Controller">
+   <h2>Enter Your Details</h2>
+    <fieldset>
+      <input ng-model="name" placeholder="Full Name">
+      <input ng-model="title" placeholder="Title">
+      <input ng-model="university" placeholder="University">
+      <input ng-model="unit" placeholder="Unit">
+      <input ng-model="address1" placeholder="Address Line 1">
+      <input ng-model="address2" placeholder="Address Line 2">
+      <input ng-model="address3" placeholder="Address Line 3">
+      <input ng-model="phone_input" ng-change="checkPhone()" placeholder="Phone Number">
+      <input ng-model="mobile_input" ng-change="checkMobile()" placeholder="Mobile Number (optional)">
+    </fieldset>
+
+    <h2>PC Signature</h2>
+    <div class="email-signature pc">
+      <div class="name-line">
+        {{ name }}
+      </div>
+      <div class="title-line">
+        {{ title }}
+      </div>
+      <div class="university-line">
+        {{ university }}
+      </div>
+      <div class="unit-line">
+        {{ unit }}
+      </div>
+      <div class="address-lines">
+        <span id="address1">{{ address1 }}</span>
+        <span id="address2">{{ address2 }}</span>
+        <span id="address3">{{ address3 }}</span>
+      </div>
+      <div class="phone-line">
+        {{ phone }} {{ mobile }}
+      </div>
+    </div>
+
+    <h2>Mac Signature</h2>
+    <div class="email-signature mac">
+      <div class="name-line">
+        {{ name }}
+      </div>
+      <div class="title-line">
+        {{ title }}
+      </div>
+      <div class="university-line">
+        {{ university }}
+      </div>
+      <div class="unit-line">
+        {{ unit }}
+      </div>
+      <div class="address-lines">
+        <span id="address1">{{ address1 }}</span>
+        <span id="address2">{{ address2 }}</span>
+        <span id="address3">{{ address3 }}</span>
+      </div>
+      <div class="phone-line">
+        {{ phone }} {{ mobile }}
+      </div>
+    </div>
+  </div>
+</div>
